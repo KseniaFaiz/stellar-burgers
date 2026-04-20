@@ -18,8 +18,14 @@ export const selectUpdateUserError = (state: RootState) =>
 
 export const selectFeedData = (state: RootState) => state.feed.data;
 export const selectFeedOrders = (state: RootState) => state.feed.data.orders;
+export const selectFeedLoading = (state: RootState) => state.feed.isLoading;
+export const selectFeedError = (state: RootState) => state.feed.error;
 
 export const selectProfileOrders = (state: RootState) =>
   state.profileOrders.orders;
+export const selectProfileOrdersLoading = (state: RootState) =>
+  state.profileOrders.isLoading;
+export const selectProfileOrdersError = (state: RootState) =>
+  state.profileOrders.error;
 
 export const selectOrderInfo = (state: RootState) => state.orderInfo.order;
