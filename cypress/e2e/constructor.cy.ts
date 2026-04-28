@@ -17,19 +17,25 @@ describe('конструктор бургера', () => {
       cy.contains('Добавить').click();
     });
 
-    cy.contains('Булка тестовая (верх)').should('exist');
-    cy.contains('Булка тестовая (низ)').should('exist');
-    cy.contains('Начинка тестовая').should('exist');
+    cy.get('[data-cy="burger-constructor"]').within(() => {
+      cy.contains('Булка тестовая (верх)').should('exist');
+      cy.contains('Булка тестовая (низ)').should('exist');
+      cy.contains('Начинка тестовая').should('exist');
+    });
   });
 
   it('открывает и закрывает модальное окно ингредиента (крестик и оверлей)', () => {
     cy.contains('Начинка тестовая').click();
     cy.contains('Детали ингредиента').should('exist');
-    cy.contains('Начинка тестовая').should('exist');
+    cy.get('[data-testid="modal"]').within(() => {
+      cy.contains('Начинка тестовая').should('exist');
+    });
 
     cy.get('[data-testid="modal-close"]').click();
     cy.contains('Детали ингредиента').should('not.exist');
 
+    cy.location('pathname', { timeout: 20000 }).should('eq', '/');
+    cy.contains('Соусы').click();
     cy.contains('Соус тестовый').click();
     cy.contains('Детали ингредиента').should('exist');
     cy.get('[data-testid="modal-overlay"]').click({ force: true });
@@ -94,4 +100,3 @@ describe('конструктор бургера', () => {
     cy.contains('Выберите начинку').should('exist');
   });
 });
-
